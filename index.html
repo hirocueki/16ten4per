@@ -1,0 +1,30 @@
+<body>
+    <script src="https://unpkg.com/hyperapp"></script>
+    <script src="https://unpkg.com/@hyperapp/html"></script>
+    <script>
+    
+    const { h, app } = hyperapp
+    const { div, h1, button } = html
+    
+    const state = {
+      count: 0
+    }
+    
+    const actions = {
+      down: value => state => ({ count: state.count - value }),
+      up: value => state => ({ count: state.count + value }),
+      reset: value => state => ({ count: 0 })
+    }
+    
+    const view = (state, actions) =>
+      div([
+        h1(state.count),
+        button({ onclick: () => actions.down(1) }, "–"),
+        button({ onclick: () => actions.up(1) }, "+"),
+        button({ onclick: () => actions.reset() }, "0")
+      ])
+    
+    const main = app(state, actions, view, document.body)
+    
+    </script>
+    </body>
